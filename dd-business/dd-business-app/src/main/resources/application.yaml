@@ -1,0 +1,15 @@
+server:
+  port: 48082
+
+spring:
+  application:
+    name: system-business-app
+
+  profiles:
+    active: test
+
+  config:
+    import:
+      - optional:classpath:application-${spring.profiles.active}.yaml # 加载【本地】配置
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml # 加载【Nacos】的配置
+      - optional:nacos:application.yaml # 加载【Nacos】公共配置

@@ -1,0 +1,54 @@
+--- #################### 数据库相关配置 ####################
+spring:
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      grace-destroy: false #是否优雅关闭数据源，默认为false，设置为true时，关闭数据源时如果数据源中还存在活跃连接，至多等待10s后强制关闭
+      datasource:
+        master:
+          url: jdbc:mysql://d7e9519ca4a042cca012f83612aaefe7in01.internal.cn-north-4.mysql.rds.myhuaweicloud.com:3306/dd?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: Dd@258369
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave_1:
+          url: jdbc:mysql://d7e9519ca4a042cca012f83612aaefe7in01.internal.cn-north-4.mysql.rds.myhuaweicloud.com:3306/dd?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: Dd@258369
+          driver-class-name: com.mysql.cj.jdbc.Driver
+
+  cloud:
+    nacos:
+      server-addr: 172.31.15.251:8848 # Nacos 服务器地址
+      username: nacos
+      password: nacos
+      discovery: # 【配置中心】配置项
+        namespace: test # 命名空间。这里使用 dev 开发环境
+        group: DEFAULT_GROUP # 使用的 Nacos 配置分组，默认为 DEFAULT_GROUP
+      config: # 【注册中心】配置项
+        namespace: test # 命名空间。这里使用 dev 开发环境
+        group: DEFAULT_GROUP # 使用的 Nacos 配置分组，默认为 DEFAULT_GROUP
+        refresh-enabled: true  # 开启自动刷新
+
+
+  # Redis 配置。Redisson 默认的配置足够使用，一般不需要进行调优
+  redis:
+    host: 192.168.0.62 # 地址
+    port: 6379 # 端口
+    database: 0 # 数据库索引
+    password: Re9llUlKklSLW1n7JtK95psxYoL5RIpo # 密码，建议生产环境开启
+
+
+  # RabbitMQ 配置项，对应 RabbitProperties 配置类
+  rabbitmq:
+    host: 172.31.3.43 # RabbitMQ 服务的地址
+    port: 5672 # RabbitMQ 服务的端口
+    username: admin # RabbitMQ 服务的账号
+    password: Dd@258369 # RabbitMQ 服务的密码
+
+
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:9090/xxl-job-admin # 调度中心部署跟地址
+
